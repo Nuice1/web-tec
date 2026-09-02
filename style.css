@@ -1,0 +1,106 @@
+body {
+    background-color: #ffffff;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    cursor: none;
+}
+
+h1 {
+    color: #FF0052;
+    text-align: center;
+    font-size: 50px;
+    background-color: #000000;
+    padding: 20px 40px;
+    margin-top: 0;
+}
+
+h2 {
+    font-size: 25px;
+    color: #333333;
+    margin-left: 20px;
+}
+
+p, ul {
+    margin-left: 20px;
+    color: #555555;
+}
+
+/* จัดตรงกลางสำหรับภาพ GIF แทนการใช้แท็ก <center> */
+.gif-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.profile-gif {
+    width: 70px;
+    height: 35px;
+}
+/* ซ่อนเมาส์เดิมของระบบ */
+
+    
+
+
+/* สร้างวงกลมขึ้นมาแทนเมาส์ */
+.custom-cursor {
+   
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none; /* เพื่อให้คลิกทะลุไปกดปุ่มด้านหลังได้ */
+    transition: transform 0.1s ease;
+    z-index: 9999;
+}
+#gif-loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: #000000; /* สีพื้นหลังช่วงโชว์ GIF */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 10s ease;
+}
+
+#gif-loader img {
+    width: 1500px;
+    height: auto;
+}
+
+/* --- 2. ซ่อนเนื้อหาหลักไว้ก่อน --- */
+#main-content {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+}
+.container {
+  display: grid;
+  grid-template-areas:
+    "header header"
+    "menu content"
+    "footer footer";
+  grid-template-columns: 1fr 3fr;
+  gap: 3px;
+  background-color: dodgerblue;
+  padding: 5px;
+}
+.container div {
+  background-color: white;
+  padding: 10px;
+}
+.container div.header {
+  grid-area: header;
+  text-align: center;
+}
+.container div.menu {
+  grid-area: menu;
+}
+.container div.content {
+  grid-area: content;
+}
+.container div.footer {
+  grid-area: footer;
+  text-align: center;  
+}
