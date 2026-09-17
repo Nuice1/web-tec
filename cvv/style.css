@@ -1,0 +1,337 @@
+body {
+    background-color: #ffffff;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    cursor: none;
+}
+
+
+
+h1 {
+    color: #FF0052;
+    text-align: center;
+    font-size: 50px;
+    background-color: #000000;
+    padding: 20px 40px;
+    margin-top: 0;
+}
+
+h2 {
+    font-size: 25px;
+    color: #333333;
+    margin-left: 20px;
+}
+
+p, ul {
+    margin-left: 20px;
+    color: #555555;
+}
+
+.gif-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.profile-gif {
+    width: 70px;
+    height: 35px;
+}
+
+.custom-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 24px;
+    height: 24px;
+    pointer-events: none;
+    z-index: 9999;
+    /* เปลี่ยนจากเดิม หรือลบ transform ออก แล้วใช้ top/left ควบคุมแทน หรือแก้ดังนี้ */
+    transform: translate(0, 0); /* ให้จุดเริ่มต้นอยู่ที่มุมซ้ายบนพอดีกับปลายเคอร์เซอร์ */
+}
+
+.cursor-image {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: contain;
+}
+
+#gif-loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: #000000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.6s ease;
+    cursor: none !important;
+}
+
+#gif-loader img {
+    width: 1500px;
+    max-width: 90vw;
+    height: auto;
+    cursor: none !important;
+}
+
+#main-content {
+    display: block;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+}
+
+
+.container {
+    display: grid;
+    grid-template-areas:
+      "header header"
+      "menu content"
+      "footer footer";
+    grid-template-columns: 1fr 3fr;
+    gap: 3px;
+    background-color: dodgerblue;
+    padding: 5px;
+}
+
+.container div {
+    background-color: white;
+    padding: 10px;
+}
+
+.container div.header {
+    grid-area: header;
+    text-align: center;
+}
+
+.container div.menu {
+    grid-area: menu;
+}
+
+.container div.content {
+    grid-area: content;
+}
+
+.container div.footer {
+    grid-area: footer;
+    text-align: center;
+}
+/* ซ่อนเมนูบนจอมือถือเป็นค่าเริ่มต้น */
+#nav-menu {
+    display: none;
+}
+
+/* คลาสที่จะถูกสลับด้วย JS เมื่อกดปุ่ม Burger */
+#nav-menu.show {
+    display: block;
+}
+
+/* ตั้งค่าปุ่ม Go to Top ให้ลอยอยู่มุมขวาล่าง */
+#top-btn {
+    display: none; /* ซ่อนไว้ก่อนเริ่มต้น */
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 999;
+}
+
+/* ========================================== */
+/*   การปรับแต่งสำหรับหน้าจอมือถือ (Responsive)   */
+/* ========================================== */
+
+/* 1. จัดแต่ง Header และ Burger Menu ให้สวยงามบนมือถือ */
+header {
+    background-color: #000000;
+    color: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+header .logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #FF0052;
+}
+
+/* ปุ่ม Burger Menu */
+#burger-btn {
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: 28px;
+    cursor: pointer;
+    display: block; /* แสดงปุ่มแฮมเบอร์เกอร์ */
+}
+
+/* เมนูที่ซ่อน/แสดงด้วย JavaScript */
+#nav-menu {
+    display: none; /* ค่าเริ่มต้นซ่อนไว้ */
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: #111111;
+    padding: 10px 0;
+    box-shadow: 0px 4px 6px rgba(0,0,0,0.3);
+}
+
+#nav-menu.show {
+    display: block; /* แสดงผลเมื่อกดปุ่มด้วย JS */
+}
+
+#nav-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+
+#nav-menu ul li {
+    padding: 10px 0;
+}
+
+#nav-menu ul li a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+#nav-menu ul li a:hover {
+    color: #FF0052;
+}
+
+/* 2. จัดระเบียบ Contact Form ให้ไม่ล้นหน้าจอมือถือ */
+#contact {
+    background-color: #f9f9f9;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 8px;
+}
+
+#contact-form {
+    display: flex;
+    flex-direction: column;
+}
+
+#contact-form label {
+    margin-top: 10px;
+    font-weight: bold;
+    color: #333;
+}
+
+#contact-form input, 
+#contact-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; /* ป้องกันไม่ให้ช่องกรอกล้นขอบจอ */
+    font-size: 16px;
+}
+
+#contact-form button {
+    margin-top: 15px;
+    background-color: #FF0052;
+    color: white;
+    border: none;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#contact-form button:hover {
+    background-color: #e00048;
+}
+
+/* 3. จัดแต่ง Footer และปุ่ม Go to Top */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #f1f1f1;
+    margin-top: 30px;
+    position: relative;
+}
+
+#top-btn {
+    display: none; /* ซ่อนไว้จนกว่าจะเลื่อนหน้าจอลงมา */
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #FF0052;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 50px;
+    font-size: 14px;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    z-index: 999;
+}
+/* ========================================== */
+/*   Media Query สำหรับหน้าจอมือถือและแท็บเล็ต   */
+/* ========================================== */
+
+/* เมื่อหน้าจอมีความกว้างไม่เกิน 768px (ขนาดหน้าจอมือถือและแท็บเล็ตทั่วไป) */
+@media screen and (max-width: 768px) {
+    
+    /* ปรับหัวข้อ h1 ให้เล็กลง ไม่ให้ล้นจอมือถือ */
+    h1 {
+        font-size: 32px;
+        padding: 15px 20px;
+    }
+
+    /* ปรับหัวข้อ h2 และข้อความทั่วไปให้มีระยะขอบพอดีกับมือถือ */
+    h2 {
+        font-size: 20px;
+        margin-left: 15px;
+    }
+
+    p, ul {
+        margin-left: 15px;
+        margin-right: 15px;
+        font-size: 14px;
+    }
+
+    /* ปรับฟอร์มติดต่อให้เกือบเต็มหน้าจอ */
+    #contact {
+        margin: 10px;
+        padding: 15px;
+    }
+
+    /* ปรับขนาด Loader รูป GIF ตอนโหลดหน้าเว็บไม่ให้กว้างเกินจอ */
+    #gif-loader img {
+        max-width: 95vw;
+    }
+}
+/* สำหรับมือถือขนาดเล็ก (ความกว้างไม่เกิน 480px) */
+@media screen and (max-width: 480px) {
+    h1 {
+        font-size: 26px; /* ย่อหัวข้อให้เล็กลงอีกนิดเพื่อไม่ให้ตัวหนังสือตัดบรรทัดน่าเกลียด */
+        padding: 10px;
+    }
+
+    header .logo {
+        font-size: 20px;
+    }
+
+    #contact {
+        margin: 5px;
+        padding: 10px;
+    }
+
+    /* ปรับปุ่มส่งข้อความให้เต็มความกว้าง กดง่ายบนมือถือ */
+    #contact-form button {
+        width: 100%;
+    }
+}
